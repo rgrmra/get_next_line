@@ -6,7 +6,7 @@
 /*   By: rde-mour <rde-mour@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 19:21:28 by rde-mour          #+#    #+#             */
-/*   Updated: 2023/11/15 17:45:12 by rde-mour         ###   ########.org.br   */
+/*   Updated: 2023/11/15 19:22:16 by rde-mour         ###   ########.org.br   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,6 @@ static char	*read_next_line(t_data *file)
 	i = 0;
 	if ((file -> buffered && lstfind_character(file -> buffered, '\n')))
 		return (build_string(&file -> buffered));
-	while (i < BUFFER_SIZE)
-		*(file -> buffer + i++) = 0;
 	file -> status = read(file -> fd, file -> buffer, BUFFER_SIZE);
 	if (file -> status == -1 || file -> fd == -1)
 		return (free_memory(&file -> buffered));
