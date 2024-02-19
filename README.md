@@ -25,10 +25,10 @@ get_next_line - read a line from a file descriptor
 
 ```c
 // MANDATORY: Supports only one file descriptor
-include  "get_next_line.h"
+#include  "get_next_line.h"
 
 // BONUS: Supports one or more file descriptors at the same time
-include  "get_next_line_bonus.h"
+#include  "get_next_line_bonus.h"
 ```
 
 #### PROTOTYPE
