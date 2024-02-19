@@ -55,6 +55,9 @@ git clone https://github.com/rgrmra/get_next_line.git get_next_line
 
 Then compile the files as following:
 
+> [!NOTE]
+> The `main.c` that I built is limited just to one file descriptor at time; but it's possible to use more file descriptors with the **get_next_line** bonus version.
+
 #### Mandatory:
 
 Reads from just one file descriptor.
@@ -84,5 +87,3 @@ Reads from a file.
 ```shell
 ./get_next_line example.txt
 ```
-
-> Obs.: The `main.c` that I built is limited just to one file descriptor at time; but it's possible to use more file descriptors with the **get_next_line** bonus version.
