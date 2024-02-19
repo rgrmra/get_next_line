@@ -1,18 +1,51 @@
-# Get Next Line
+<img align="center" src="https://royalbox.com.br/github/get_next_line_banner.png">
+<p align="center">
+   <img src="https://img.shields.io/github/languages/code-size/rgrmra/get_next_line?color=blue&style=for-the-badge" />
+   <img src="https://img.shields.io/github/languages/top/rgrmra/get_next_line?color=blue&style=for-the-badge" />
+   <img src="https://img.shields.io/github/last-commit/rgrmra/get_next_line?color=blue&style=for-the-badge" />
+</p>
 
-A function that reads from a file descriptor and returns a string until the new line character or the end of the file.
+<p align="center">
+  This project is about programming a function that returns a line read from a file descriptor.
+</p>
 
-#### How does it work?
+# Project
 
-This function works with a list of characters and allocates memory for each character. When the function finds a new line character (_'\n'_), it returns an allocated string until the new line character followed by a null character (_'\0'_).
+This is the secound project of the common core at 42 São Paulo. The project wants that you code a function that read from a file descriptor and returns an allocated line. The returned line has a _newline character_ at the end of the string followed by a _null character_.
 
-#### Prototype:
+The **get_next_line** works with all file descriptors, so it's also possible to read from the _Standard Input_, _Standard Output_ and _Standard Error_.
+
+# Documentation
+
+#### NAME
+
+get_next_line - read a line from a file descriptor
+
+#### SYNOPSIS
+
+```c
+// MANDATORY: Supports only one file descriptor
+include  "get_next_line.h"
+
+// BONUS: Supports one or more file descriptors at the same time
+include  "get_next_line_bonus.h"
+```
+
+#### PROTOTYPE
 
 ```c
 char    *get_next_line(int fd);
 ```
 
-## How to use it?
+#### DESCRIPTION
+
+**get_next_line** will read a line from a file descriptor and return an allocated string. If file descriptor is empty or EOF, a NULL will be returned. The line returned is allocated with malloc; the caller must free it when finished. The line returned has the final newline.
+
+#### RETURN VALUE
+
+**get_next_line** returns the text of the first line read from a file descriptor. A blank line returns a empty string. If **EOF** is encontered while reading a line, and the line is empty, **NULL** is returned.
+
+# How to test it?
 
 Clone this repository:
 
@@ -52,6 +85,4 @@ Reads from a file.
 ./get_next_line example.txt
 ```
 
-#### Observation:
-
-> The `main.c` that I built is limited just to an file descriptor.
+> Obs.: The `main.c` that I built is limited just to one file descriptor at time; but it's possible to use more file descriptors with the **get_next_line** bonus version.
