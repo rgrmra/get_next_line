@@ -3,6 +3,7 @@
    <img src="https://img.shields.io/github/languages/code-size/rgrmra/get_next_line?color=blue&style=for-the-badge" />
    <img src="https://img.shields.io/github/languages/top/rgrmra/get_next_line?color=blue&style=for-the-badge" />
    <img src="https://img.shields.io/github/last-commit/rgrmra/get_next_line?color=blue&style=for-the-badge" />
+   <img src="https://img.shields.io/github/license/rgrmra/get_next_line?color=blue&style=for-the-badge" />
 </p>
 
 <p align="center">
