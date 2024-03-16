@@ -6,63 +6,63 @@
 /*   By: rde-mour <rde-mour@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 19:37:59 by rde-mour          #+#    #+#             */
-/*   Updated: 2024/02/18 19:19:13 by rde-mour         ###   ########.org.br   */
+/*   Updated: 2024/03/16 10:03:38 by rde-mour         ###   ########.org.br   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-t_buffered	*gnl_lstnew(int character)
+void	gnl_lstadd_back(t_buffered **list, int character)
 {
 	t_buffered	*new;
+	t_buffered	*tmp;
 
+	if (!list)
+		return ;
 	new = (t_buffered *) malloc(1 * sizeof(t_buffered));
 	if (!new)
-		return (0);
+		return ;
 	new->character = character;
-	new->next = 0;
-	return (new);
+	new->next = NULL;
+	if (*list)
+	{
+		tmp = *list;
+		while (tmp->next)
+			tmp = tmp->next;
+		tmp->next = new;
+		return ;
+	}
+	*list = new;
 }
 
-t_buffered	*gnl_lstlast(t_buffered *list)
+int	gnl_lstfind_character(t_buffered *list, int character, int eof)
 {
+	int	i;
+
 	if (!list)
 		return (0);
-	while (list->next != 0)
-		list = list->next;
-	return (list);
-}
-
-void	gnl_lstadd_back(t_buffered **list, t_buffered *new)
-{
-	if (!list || !new)
-		return ;
-	if (!(*list))
-		*list = new;
-	else
-		gnl_lstlast(*list)->next = new;
-}
-
-int	gnl_lstfind_character(t_buffered *list, int character)
-{
+	i = 1;
 	while (list)
 	{
+		i++;
 		if (list->character == character)
-			return (1);
+			return (i);
 		list = list->next;
 	}
-	return (0);
+	return (i * eof);
 }
 
-char	*gnl_free_memory(t_buffered **list)
+char	*gnl_lstclear(t_buffered **list)
 {
 	t_buffered	*tmp;
 
+	if (!list || !(*list))
+		return (NULL);
 	while (*list)
 	{
 		tmp = *list;
 		*list = (*list)->next;
 		free(tmp);
 	}
-	return (0);
+	return (NULL);
 }

@@ -6,7 +6,7 @@
 /*   By: rde-mour <rde-mour@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 19:21:28 by rde-mour          #+#    #+#             */
-/*   Updated: 2024/02/18 19:19:47 by rde-mour         ###   ########.org.br   */
+/*   Updated: 2024/03/16 10:02:29 by rde-mour         ###   ########.org.br   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,15 +19,15 @@ static char	*gnl_build_string(t_buffered **list)
 	char		*str;
 	t_buffered	*tmp;
 
-	size = 0;
-	tmp = *list;
-	while (tmp && ++size && tmp->character != '\n')
-		tmp = tmp -> next;
-	str = (char *) malloc(size + 1);
+	if (!list || !(*list))
+		return (NULL);
+	size = gnl_lstfind_character(*list, '\n', END_LINE);
+	str = (char *) malloc(size * sizeof(char));
 	if (!str)
-		return (gnl_free_memory(list));
+		return (gnl_lstclear(list));
 	i = 0;
-	while (*list && i < size)
+	tmp = *list;
+	while (--size)
 	{
 		tmp = *list;
 		*(str + i++) = (*list)->character;
@@ -45,20 +45,17 @@ char	*get_next_line(int fd)
 	static char			buffer[BUFFER_SIZE];
 	static t_buffered	*list;
 
-	if (fd == -1)
-		return (gnl_free_memory(&list));
-	if (list && gnl_lstfind_character(list, '\n'))
+	if (fd < 0)
+		return (gnl_lstclear(&list));
+	if (gnl_lstfind_character(list, '\n', NEW_LINE))
 		return (gnl_build_string(&list));
 	status = read(fd, buffer, BUFFER_SIZE);
-	if (status == -1 || fd == -1)
-		return (gnl_free_memory(&list));
+	if (status < 0 || fd < 0)
+		return (gnl_lstclear(&list));
 	i = 0;
+	while (i < status)
+		gnl_lstadd_back(&list, *(buffer + i++));
 	if (status)
-		while (i < status)
-			gnl_lstadd_back(&list, gnl_lstnew(*(buffer + i++)));
-	if (status && list)
 		return (get_next_line(fd));
-	else if (list)
-		return (gnl_build_string(&list));
-	return (0);
+	return (gnl_build_string(&list));
 }

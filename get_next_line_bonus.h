@@ -6,7 +6,7 @@
 /*   By: rde-mour <rde-mour@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 19:17:23 by rde-mour          #+#    #+#             */
-/*   Updated: 2024/02/18 19:11:48 by rde-mour         ###   ########.org.br   */
+/*   Updated: 2024/03/16 10:30:30 by rde-mour         ###   ########.org.br   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 
 # include <stdlib.h>
 # include <unistd.h>
-# include <fcntl.h>
 
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 2048
@@ -23,7 +22,6 @@
 
 typedef struct s_data
 {
-	char			initiated;
 	int				fd;
 	ssize_t			status;
 	char			*buffer;
@@ -36,11 +34,15 @@ typedef struct s_string
 	struct s_string	*next;
 }					t_buffered;
 
+enum	e_end
+{
+	NEW_LINE,
+	END_LINE
+};
+
 char		*get_next_line(int fd);
-char		*gnl_free_memory(t_buffered **list);
-t_buffered	*gnl_lstnew(int character);
-t_buffered	*gnl_lstlast(t_buffered *list);
-void		gnl_lstadd_back(t_buffered **list, t_buffered *new);
-int			gnl_lstfind_character(t_buffered *list, int character);
+char		*gnl_lstclear(t_buffered **list);
+void		gnl_lstadd_back(t_buffered **list, int character);
+int			gnl_lstfind_character(t_buffered *list, int character, int eof);
 
 #endif
