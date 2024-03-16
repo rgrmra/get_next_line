@@ -88,3 +88,11 @@ Reads from a file.
 ```shell
 ./get_next_line example.txt
 ```
+
+> [!IMPORTANT]
+> The **get_next_line** function has a buffer size of 2048 bits, but is possible to redefine it.<br>
+> Use the flag `-D BUFFER_SIZE=<value>` (eg. `-D BUFFER_SIZE=10240`) to redefine the buffer size.
+
+```bash
+cc -Wall -Wextra -Werror main.c get_next_line.c get_next_line_utils.c -o get_next_line -D BUFFER_SIZE=10240
+```
