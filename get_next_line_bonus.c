@@ -6,7 +6,7 @@
 /*   By: rde-mour <rde-mour@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 19:21:28 by rde-mour          #+#    #+#             */
-/*   Updated: 2024/03/16 10:39:49 by rde-mour         ###   ########.org.br   */
+/*   Updated: 2024/03/30 07:58:06 by rde-mour         ###   ########.org.br   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,9 +51,9 @@ static char	*read_next_line(t_data *file)
 	i = 0;
 	while (i < file->status)
 		gnl_lstadd_back(&file->buffered, *(file->buffer + i++));
-	if (file->status)
-		return (read_next_line(file));
-	return (gnl_build_string(&file->buffered));
+	if (!file->status)
+		return (gnl_build_string(&file->buffered));
+	return (read_next_line(file));
 }
 
 static char	*gnl_lstclear_all(t_data file[])
