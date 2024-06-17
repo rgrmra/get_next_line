@@ -6,7 +6,7 @@
 /*   By: rde-mour <rde-mour@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 19:21:28 by rde-mour          #+#    #+#             */
-/*   Updated: 2024/03/30 07:58:06 by rde-mour         ###   ########.org.br   */
+/*   Updated: 2024/06/17 20:19:48 by rde-mour         ###   ########.org.br   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ static char	*read_next_line(t_data *file)
 	if (gnl_lstfind_character(file->buffered, '\n', NEW_LINE))
 		return (gnl_build_string(&file->buffered));
 	file -> status = read(file->fd, file->buffer, BUFFER_SIZE);
-	if (file->status < 0 || file->fd < -1)
+	if (file->status < 0)
 		return (gnl_lstclear(&file->buffered));
 	i = 0;
 	while (i < file->status)
